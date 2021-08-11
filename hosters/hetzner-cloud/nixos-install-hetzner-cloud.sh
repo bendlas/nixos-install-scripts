@@ -41,9 +41,9 @@ set -e
 # disk on first boot. In case the NixOS live ISO is booted immediately on
 # first powerup, that does not happen. Thus we need to grow the partition
 # by deleting and re-creating it.
-sgdisk -n 12:-1G:0
 sgdisk -d 1 /dev/sda
-sgdisk -N 1 /dev/sda
+sgdisk -n 1:0:-1G /dev/sda
+sgdisk -N 12 /dev/sda
 partprobe /dev/sda
 
 mkfs.ext4 -F /dev/sda1 # wipes all data!
